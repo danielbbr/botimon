@@ -36,7 +36,8 @@ export const auth = {
 
 export const devices = {
   getAll: () => api.get('/devices'),
-  update: (mac, name, icon) => api.post('/devices/update', { mac, name, icon })
+  update: (mac, name, icon) => api.post('/devices/update', { mac, name, icon }),
+  delete: (mac) => api.delete(`/devices/${mac}`)
 };
 
 export default api;

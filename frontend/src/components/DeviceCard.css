@@ -183,3 +183,26 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.forget-button {
+  flex: 1;
+  padding: 10px;
+  background: #ff4444;
+  color: white;
+  border: 2px solid #ff4444;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.forget-button:hover:not(:disabled) {
+  background: #ff3333;
+  border-color: #ff3333;
+}
+
+.forget-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

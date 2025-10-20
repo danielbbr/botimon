@@ -4,7 +4,7 @@ import { devices as devicesApi } from '../services/api';
 import IconSelector from './IconSelector';
 import './DeviceCard.css';
 
-function DeviceCard({ device, onUpdate, onDeviceUpdate }) {
+function DeviceCard({ device, onUpdate, onDeviceUpdate, onForgetDevice }) {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(device.name || '');
   const [selectedIcon, setSelectedIcon] = useState(device.icon || 'default');
@@ -35,6 +35,22 @@ function DeviceCard({ device, onUpdate, onDeviceUpdate }) {
     setSelectedIcon(device.icon || 'default');
     setIsEditing(false);
     setShowIconSelector(false);
+  };
+
+  const handleForget = async () => {
+      try {
+        // Delete from backend
+        await devicesApi.delete(device.mac);
+        
+        // Call the forget function to move device to unknown list
+        if (onForgetDevice) {
+          onForgetDevice(device.mac);
+        }
+        setIsEditing(false);
+        setShowIconSelector(false);
+      } catch (error) {
+        console.error('error forgetting device:', error);
+      }
   };
 
   return (
@@ -131,6 +147,15 @@ function DeviceCard({ device, onUpdate, onDeviceUpdate }) {
           >
             Cancel
           </button>
+          {device.known && (
+            <button 
+              className="forget-button"
+              onClick={handleForget}
+              disabled={saving}
+            >
+              🗑️ Forget
+            </button>
+          )}
         </div>
       )}
     </div>

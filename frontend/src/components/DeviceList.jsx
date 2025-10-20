@@ -1,7 +1,7 @@
 import DeviceCard from './DeviceCard';
 import './DeviceList.css';
 
-function DeviceList({ title, devices, onUpdate, onDeviceUpdate, emptyMessage, highlight }) {
+function DeviceList({ title, devices, onUpdate, onDeviceUpdate, onForgetDevice, emptyMessage, highlight }) {
   if (devices.length === 0) {
     return (
       <section className="device-section">
@@ -21,6 +21,7 @@ function DeviceList({ title, devices, onUpdate, onDeviceUpdate, emptyMessage, hi
             device={device}
             onUpdate={onUpdate}
             onDeviceUpdate={onDeviceUpdate}
+            onForgetDevice={onForgetDevice}
           />
         ))}
       </div>

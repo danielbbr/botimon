@@ -40,4 +40,20 @@ router.post('/devices/update', authenticateToken, (req, res) => {
   }
 });
 
+router.delete('/devices/:mac', authenticateToken, (req, res) => {
+  try {
+    const { mac } = req.params;
+
+    if (!mac) {
+      return res.status(400).json({ error: 'mac address required' });
+    }
+
+    identifier.deleteDevice(mac);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('delete error:', error);
+    res.status(500).json({ error: 'failed to delete device' });
+  }
+});
+
 export default router;

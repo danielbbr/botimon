@@ -74,6 +74,40 @@ function Dashboard() {
     });
   };
 
+  const forgetDevice = (mac) => {
+    setDeviceData(prevData => {
+      // Find the device in known lists
+      const onlineKnownIndex = prevData.onlineKnown.findIndex(device => device.mac === mac);
+      const offlineKnownIndex = prevData.offlineKnown.findIndex(device => device.mac === mac);
+      
+      if (onlineKnownIndex !== -1) {
+        // Device is online known, move it to unknown
+        const deviceToMove = prevData.onlineKnown[onlineKnownIndex];
+        const forgottenDevice = {
+          ...deviceToMove,
+          name: 'Unknown',
+          icon: 'default',
+          known: false
+        };
+        
+        return {
+          onlineKnown: prevData.onlineKnown.filter(device => device.mac !== mac),
+          onlineUnknown: [...prevData.onlineUnknown, forgottenDevice],
+          offlineKnown: prevData.offlineKnown
+        };
+      } else if (offlineKnownIndex !== -1) {
+        // Device is offline known, just remove it (offline devices don't go to unknown)
+        return {
+          onlineKnown: prevData.onlineKnown,
+          onlineUnknown: prevData.onlineUnknown,
+          offlineKnown: prevData.offlineKnown.filter(device => device.mac !== mac)
+        };
+      }
+      
+      return prevData; // No changes if device not found
+    });
+  };
+
   const handleLogout = () => {
     auth.logout();
     navigate('/login');
@@ -117,6 +151,7 @@ function Dashboard() {
           devices={deviceData.onlineKnown}
           onUpdate={loadDevices}
           onDeviceUpdate={updateDevice}
+          onForgetDevice={forgetDevice}
           emptyMessage="No known devices online"
         />
 
@@ -125,6 +160,7 @@ function Dashboard() {
           devices={deviceData.onlineUnknown}
           onUpdate={loadDevices}
           onDeviceUpdate={updateDevice}
+          onForgetDevice={forgetDevice}
           emptyMessage="No unknown devices found"
           highlight
         />
@@ -134,6 +170,7 @@ function Dashboard() {
           devices={deviceData.offlineKnown}
           onUpdate={loadDevices}
           onDeviceUpdate={updateDevice}
+          onForgetDevice={forgetDevice}
           emptyMessage="All known devices are online"
         />
       </main>
