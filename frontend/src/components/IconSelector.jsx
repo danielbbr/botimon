@@ -3,11 +3,11 @@ import { createPortal } from 'react-dom';
 import './IconSelector.css';
 
 const AVAILABLE_ICONS = [
-  { id: 'default', emoji: '🖥️', label: 'Default' },
+  { id: 'default', emoji: '🔳', label: 'Default' },
   { id: 'phone', emoji: '📱', label: 'Phone' },
   { id: 'laptop', emoji: '💻', label: 'Laptop' },
   { id: 'desktop', emoji: '🖥️', label: 'Desktop' },
-  { id: 'tablet', emoji: '📱', label: 'Tablet' },
+  { id: 'tablet', emoji: '📟', label: 'Tablet' },
   { id: 'tv', emoji: '📺', label: 'TV' },
   { id: 'watch', emoji: '⌚', label: 'Watch' },
   { id: 'camera', emoji: '📷', label: 'Camera' },
@@ -15,7 +15,7 @@ const AVAILABLE_ICONS = [
   { id: 'router', emoji: '📡', label: 'Router' },
   { id: 'printer', emoji: '🖨️', label: 'Printer' },
   { id: 'game', emoji: '🎮', label: 'Game' },
-  { id: 'server', emoji: '🖥️', label: 'Server' }
+  { id: 'server', emoji: '🗄️', label: 'Server' }
 ];
 
 function IconSelector({ selected, onSelect, onClose, triggerRef }) {
