@@ -14,8 +14,8 @@ a network device monitoring browser app for local networks. scan and manage devi
 ## quick start
 
 ```bash
-# start the application (sudo might be needed)
-./botimon.sh start
+# start the application
+sudo ./botimon.sh start
 
 # view all options
 ./botimon.sh --help
