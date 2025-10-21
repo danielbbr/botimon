@@ -1,5 +1,7 @@
 # botimon
 
+![botimon screenshot](screenshot.png)
+
 a network device monitoring browser app for local networks. scan and manage devices connected to your local network.
 
 ## features
